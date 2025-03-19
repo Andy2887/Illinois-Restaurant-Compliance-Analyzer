@@ -1,0 +1,13 @@
+aws emr add-steps \
+--cluster-id j-1VE06SA9NF1LV --region us-east-2 \
+--steps Type=CUSTOM_JAR,Name=MyStep,ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args="[spark-submit,s3://liheng-emr-tutorial/monthly-build/2025-02/main.py,--data_source,s3://liheng-emr-tutorial/monthly-build/2025-02/input/Food_Establishment_Inspection_Data_20250309.csv,--output_uri,s3://liheng-emr-tutorial/monthly-build/2025-02/output/]"
+
+python3 client.py \
+  --cluster-id j-28LMKJ9JZM4SM \
+  --region us-east-2 \
+  --script s3://liheng-emr-tutorial/monthly-build/2025-02/main.py \
+  --input s3://liheng-emr-tutorial/monthly-build/2025-02/input/Food_Establishment_Inspection_Data_20250309.csv \
+  --output s3://liheng-emr-tutorial/monthly-build/2025-02/output/ \
+  --wait \
+  --show-results \
+   --limit 20
