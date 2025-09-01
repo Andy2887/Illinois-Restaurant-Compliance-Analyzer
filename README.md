@@ -4,24 +4,6 @@ A comprehensive big data processing pipeline designed to identify and analyze re
 
 ## Project Overview
 
-The Illinois Restaurant Compliance Analyzer is a scalable data processing solution that:
-
-- **Processes large-scale restaurant inspection data** from Illinois health departments
-- **Identifies critical "RED" violations** that pose immediate health risks to consumers
-- **Aggregates violation counts** by restaurant to identify repeat offenders
-- **Provides actionable insights** for health inspectors and public health officials
-- **Leverages cloud computing** for efficient processing of massive datasets
-
-### Key Features
-
-- **Distributed Processing**: Uses Apache Spark on Amazon EMR for scalable data processing
-- **Automated Analysis**: Processes CSV data files and generates structured parquet outputs
-- **Cloud Integration**: Seamless integration with AWS S3 for data storage and retrieval
-- **Real-time Monitoring**: Job status tracking and result visualization
-- **Flexible Configuration**: Customizable parameters for different analysis scenarios
-
-### Data Processing Pipeline
-
 1. **Data Ingestion**: Restaurant inspection data is uploaded to S3 in CSV format
 2. **Distributed Processing**: PySpark job processes data across EMR cluster nodes
 3. **Violation Analysis**: Filters and aggregates critical "RED" violations by restaurant
@@ -242,44 +224,10 @@ Restaurant Violations Summary
 └─────────────────────────────────────┴─────────────────────────┘
 ```
 
-## Monitoring and Troubleshooting
-
-### Check Job Status
-```bash
-# Check EMR cluster status
-aws emr describe-cluster --cluster-id j-YOUR-CLUSTER-ID
-
-# List steps for a cluster
-aws emr list-steps --cluster-id j-YOUR-CLUSTER-ID
-```
-
-### Common Issues and Solutions
-
-#### Issue: "Cluster not found"
-- **Solution**: Verify cluster ID and ensure cluster is in WAITING state
-
-#### Issue: "Access denied" errors
-- **Solution**: Check IAM permissions for EMR, S3, and CloudWatch access
-
-#### Issue: "No data in results"
-- **Solution**: Verify input data contains "RED" violations in the "Violation Type" column
-
-#### Issue: Job fails with memory errors
-- **Solution**: Increase EMR cluster instance size or add more nodes
-
-### Logs and Debugging
-```bash
-# View cluster logs
-aws emr describe-cluster --cluster-id j-YOUR-CLUSTER-ID \
-  --query 'Cluster.LogUri'
-
-# View step logs in S3 console at the LogUri location
-```
-
 ## Project Structure
 ```
 Illinois-Restaurant-Compliance-Analyzer/
-├── README.md              # This documentation
+├── README.md             # This documentation
 ├── main.py               # PySpark data processing job
 ├── client.py             # EMR job submission client
 ├── command.txt           # Example commands and usage
